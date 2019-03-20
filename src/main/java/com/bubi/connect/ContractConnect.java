@@ -1,3 +1,5 @@
+package com.bubi.connect;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import io.bumo.SDK;

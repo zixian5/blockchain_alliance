@@ -2,35 +2,41 @@ package com.blockchain.alliance.controller;
 
 import com.blockchain.alliance.entity.User;
 import com.blockchain.alliance.repository.UserRepository;
-import com.blockchain.alliance.response.LoginResponse;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @RestController
+@RequestMapping("/account")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     @ResponseBody
-    public String login(@RequestParam(required = true) String telephone , @RequestParam(required = true) String password)
+    public String login(HttpServletRequest request, @RequestParam(required = true) String username, @RequestParam(required = true) String password)
     {
-        User u = userRepository.findByTelephone(telephone);
+        User u = userRepository.findByUsername(username);
 
-        LoginResponse response = new LoginResponse();
+        Map<String,Object> map = new LinkedHashMap<>();
+        map.put("data",null);
+
         if(u == null)
         {
-            response.setResult(false);
-        }else{
-           // LoginResponse response = new LoginResponse();
-            response.setResult(true);
-            response.setType(u.getType());
+            map.put("code",404);
         }
-
-        return new Gson().toJson(response);
+        else if(!u.getPassword().equals(password))
+        {
+            map.put("code","403");
+        }
+        else{
+            request.getSession().putValue("id",u.getId());
+            map.put("code","200");
+        }
+        return new Gson().toJson(map);
     }
 }

@@ -1,3 +1,5 @@
+package com.bubi.connect;
+
 import io.bumo.SDK;
 import io.bumo.model.request.operation.BaseOperation;
 import io.bumo.model.response.result.data.Signature;
