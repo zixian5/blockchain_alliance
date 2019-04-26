@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@Component
+//@Component
 public class LoginInterceptor  implements HandlerInterceptor {
 
     @Override

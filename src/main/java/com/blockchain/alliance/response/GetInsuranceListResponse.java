@@ -22,7 +22,9 @@ public class GetInsuranceListResponse extends AbstractResponse {
     {
         Map<String,Object> map = new LinkedHashMap<>();
         map.put("code",code);
-        map.put("data",insuranceList);
+        Map<String,Object> data = new LinkedHashMap<>();
+        data.put("insuranceList", insuranceList);
+        map.put("data",data);
         return new Gson().toJson(map);
     }
 }

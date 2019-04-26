@@ -12,7 +12,7 @@ public class User {
     private int id ;
     private String name ;
     @Column(unique = true,nullable = false)
-    private String telephone ;
+    private String email ;
     private int age ;
     @Column(nullable = false)
     private int type ; // 0为普通用户，1为管理帐号
@@ -54,12 +54,12 @@ public class User {
         this.name = name;
     }
 
-    public String getTelephone() {
-        return telephone;
+    public String getEmail() {
+        return email;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getAge() {

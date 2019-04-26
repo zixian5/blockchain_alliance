@@ -12,12 +12,12 @@ import io.bumo.model.response.result.ContractCallResult;
 import io.bumo.model.response.result.data.Signature;
 
 public class ContractConnect {
-    public static String set(String key, String value) {
+    public static String set(String key, String value,String chash) {
         String url = "http://140.143.38.123:36002";
         SDK sdk = SDK.getInstance(url);
 
         ContractGetAddressRequest request = new ContractGetAddressRequest();
-        request.setHash("cfa903fd680223b494598645264c6fbfa48d5c42137486e1c62dda0aaee7fa0c");
+        request.setHash(chash);
 
 // 调用getAddress接口
         ContractGetAddressResponse response = sdk.getContractService().getAddress(request);
@@ -45,12 +45,12 @@ public class ContractConnect {
         return hash;
     }
 
-    public static String get(String key) {
+    public static String get(String key,String chash) {
         String url = "http://140.143.38.123:36002";
         SDK sdk = SDK.getInstance(url);
 
         ContractGetAddressRequest request = new ContractGetAddressRequest();
-        request.setHash("cfa903fd680223b494598645264c6fbfa48d5c42137486e1c62dda0aaee7fa0c");
+        request.setHash(chash);
 
 // 调用getAddress接口
         ContractGetAddressResponse response = sdk.getContractService().getAddress(request);
@@ -73,7 +73,7 @@ public class ContractConnect {
         //contractCallRequest.setSourceAddress("buQd4TBqSbHw3EoLMnSmH4SJFMkHUtEQbUvz");
         contractCallRequest.setFeeLimit(1000000000L);
         contractCallRequest.setInput(input);
-        contractCallRequest.setGasPrice(100000l);
+        contractCallRequest.setGasPrice(1000l);
         contractCallRequest.setOptType(2);
         //    contractCallRequest.setInput("invalild");
 
@@ -93,6 +93,6 @@ public class ContractConnect {
     }
 
     public static void main(String[] args) {
-        System.out.println(get("04f6d29b691776ecf2c763417887143a401c11426ddcdd12c51e935091ff2274a4a5d1f6d27eaf5e28e5c62cae977b40672e6f35ae0eb0b735eda90a304bab02c2"));
+        System.out.println(get("042e36e1a0b8329167533551183630e7c24deab17aed97f58e392a34a7f33efe97a64b3c73dbc75583c48d34dbb8b045cfabd8fc21fc40599c22a3c6dcbf132faf","a2ef17f2cef9f3df9dab417fa64c7e4854c3509a0b3aee0543efaaec814ba705"));
     }
 }

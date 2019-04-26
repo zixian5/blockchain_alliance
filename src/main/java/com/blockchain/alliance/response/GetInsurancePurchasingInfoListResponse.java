@@ -21,7 +21,9 @@ public class GetInsurancePurchasingInfoListResponse extends  AbstractResponse {
     {
         Map<String,Object> map =new LinkedHashMap<>();
         map.put("code",code);
-        map.put("data",policies);
+        Map<String,Object> data = new LinkedHashMap<>();
+        data.put("insurancePurchasingInfoList", policies);
+        map.put("data",data);
         return new Gson().toJson(map);
     }
 }

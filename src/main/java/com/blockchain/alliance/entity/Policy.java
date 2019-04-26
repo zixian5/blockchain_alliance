@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Data
 @Entity
@@ -26,6 +27,24 @@ public class Policy {
     private int responsiblePersonId;
     private String responsiblePersonName;
     private String insuranceId;
+    @Transient
+    private String insuranceSign;
+
+    public int getIsMale() {
+        return isMale;
+    }
+
+    public void setIsMale(int isMale) {
+        this.isMale = isMale;
+    }
+
+    public String getSign() {
+        return insuranceSign;
+    }
+
+    public void setSign(String sign) {
+        this.insuranceSign = sign;
+    }
 
     public String generateInsurancePurchasingInfoId()
     {
@@ -140,13 +159,33 @@ public class Policy {
         return insuranceId;
     }
 
+    @Override
+    public String toString() {
+        return "Policy{" +
+                "name='" + name + '\'' +
+                ", isMale=" + isMale +
+                ", age=" + age +
+                ", healthState='" + healthState + '\'' +
+                ", publicKey='" + publicKey + '\'' +
+                ", insuranceType='" + insuranceType + '\'' +
+                ", insurancePurchasingTime='" + insurancePurchasingTime + '\'' +
+                ", insurancePeriod='" + insurancePeriod + '\'' +
+                ", insurancePurchasingStage=" + insurancePurchasingStage +
+                ", insurancePrice=" + insurancePrice +
+                ", responsiblePersonId=" + responsiblePersonId +
+                ", responsiblePersonName='" + responsiblePersonName + '\'' +
+                ", insuranceId='" + insuranceId + '\'' +
+                ", insuranceSign='" + insuranceSign + '\'' +
+                '}';
+    }
+
     public void setInsuranceId(String insuranceId) {
         this.insuranceId = insuranceId;
     }
 }
 
 enum PurshasingStage{
-    All_STAGES(-1),APPLICATION(0),INSURANCE_COMPANY_VERIFY(1),PAY(2),COMPLETE(3);
+    All_STAGES(-2),APPLICATION(0),INSURANCE_COMPANY_VERIFY(1),PAY(2),COMPLETE(3),INSURANCE_COMPANY_VERIFY_DECLINED(-1);
     private int code;
 
     PurshasingStage(int code) {
